@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOI — The Better Choices Store</title>
+<meta name="description" content="India's first better-for-you commerce platform. Health-first, clean products delivered in 30 minutes. Shop by outcome, not aisle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Schibsted+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E3B2E;
+  --leaf:#1F7A53;
+  --leaf-deep:#145C3D;
+  --matcha:#E4EEDD;
+  --matcha-soft:#F0F5EB;
+  --paper:#FAFBF7;
+  --citrus:#E8902A;
+  --citrus-soft:#FBF0DF;
+  --text:#16241D;
+  --text-soft:#4A5C52;
+  --line:#D8E2D6;
+  --white:#FFFFFF;
+  --radius:18px;
+  --display:'Bricolage Grotesque',sans-serif;
+  --body:'Schibsted Grotesk',sans-serif;
+  --mono:'Spline Sans Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--leaf);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(250,251,247,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.wordmark{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--ink);display:flex;align-items:center;gap:10px}
+.wordmark .dot{width:11px;height:11px;border-radius:50%;background:var(--citrus);display:inline-block}
+.nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:500;color:var(--text-soft)}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.city-badge{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--leaf-deep);background:var(--matcha);padding:6px 12px;border-radius:99px;white-space:nowrap}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-weight:600;font-size:15px;padding:12px 24px;border-radius:99px;border:none;transition:transform .15s ease,background .15s ease}
+.btn:hover{background:var(--leaf-deep);transform:translateY(-1px)}
+.btn.small{padding:9px 18px;font-size:14px}
+.btn.light{background:#fff;color:var(--ink)}
+.btn.light:hover{background:var(--matcha)}
+
+/* ---------- HERO ---------- */
+.hero{padding:72px 0 80px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:26px;height:1.5px;background:var(--leaf)}
+h1{font-family:var(--display);font-weight:750;font-size:clamp(40px,5.4vw,66px);line-height:1.03;letter-spacing:-1.8px;color:var(--ink)}
+h1 .strike{position:relative;white-space:nowrap;color:var(--text-soft)}
+h1 .strike::after{content:'';position:absolute;left:-2%;right:-2%;top:54%;height:4px;background:var(--citrus);border-radius:3px;transform:rotate(-2deg)}
+.hero-sub{font-size:18px;color:var(--text-soft);max-width:480px;margin:22px 0 30px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.chip{font-family:var(--body);font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:var(--text-soft);transition:all .18s ease}
+.chip:hover{border-color:var(--leaf);color:var(--leaf-deep)}
+.chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.hero-ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.delivery-note{font-family:var(--mono);font-size:12.5px;color:var(--text-soft);display:flex;align-items:center;gap:8px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--leaf);position:relative}
+.pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--leaf);opacity:.5;animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+
+/* ---------- PROOF CARD ---------- */
+.proof-stage{position:relative}
+.proof-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 24px 60px -28px rgba(14,59,46,.25);transition:opacity .25s ease,transform .25s ease;position:relative}
+.proof-card.swapping{opacity:0;transform:translateY(8px)}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.pc-goal{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--leaf-deep);background:var(--matcha);padding:5px 11px;border-radius:99px}
+.pc-eta{font-family:var(--mono);font-size:11px;color:var(--text-soft)}
+.pc-visual{height:130px;border-radius:12px;background:linear-gradient(135deg,var(--matcha-soft),var(--matcha));display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:18px}
+.pc-name{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.4px;color:var(--ink)}
+.pc-brand{font-size:13.5px;color:var(--text-soft);margin-bottom:16px}
+.why{border-top:1.5px dashed var(--line);padding-top:16px}
+.why-label{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:12px}
+.why-label .stamp{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--citrus);border:1.5px solid var(--citrus);border-radius:4px;padding:2px 7px;transform:rotate(-3deg)}
+.why ul{list-style:none}
+.why li{font-family:var(--mono);font-size:12.5px;color:var(--text);padding:7px 0;display:flex;gap:10px;border-bottom:1px solid var(--matcha-soft)}
+.why li:last-child{border-bottom:none}
+.why li .tick{color:var(--leaf);font-weight:600;flex-shrink:0}
+.pc-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.pc-price{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink)}
+.pc-add{background:var(--leaf);color:#fff;border:none;font-weight:600;font-size:14px;padding:10px 22px;border-radius:99px;transition:background .15s}
+.pc-add:hover{background:var(--leaf-deep)}
+.rejected-tag{position:absolute;bottom:-18px;right:24px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-family:var(--mono);font-size:11px;color:var(--text-soft);box-shadow:0 10px 28px -14px rgba(14,59,46,.3)}
+.rejected-tag b{color:var(--citrus)}
+
+/* ---------- TICKER ---------- */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);color:var(--matcha);overflow:hidden;padding:13px 0}
+.ticker-track{display:flex;gap:48px;white-space:nowrap;font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;animation:scroll 36s linear infinite;width:max-content}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{display:inline-flex;align-items:center;gap:10px}
+.ticker .sep{color:var(--citrus)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:92px 0}
+.sec-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf);margin-bottom:14px}
+h2{font-family:var(--display);font-weight:750;font-size:clamp(30px,3.6vw,44px);letter-spacing:-1.2px;line-height:1.1;color:var(--ink);max-width:640px}
+.sec-sub{font-size:17px;color:var(--text-soft);max-width:560px;margin-top:16px}
+
+/* curation */
+.curation{background:var(--matcha-soft)}
+.cur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+.cur-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:30px}
+.cur-num{font-family:var(--display);font-weight:800;font-size:44px;letter-spacing:-1.5px;color:var(--ink)}
+.cur-num .unit{font-size:20px;color:var(--leaf);margin-left:2px}
+.cur-card h3{font-family:var(--body);font-weight:700;font-size:16.5px;margin:10px 0 8px;color:var(--ink)}
+.cur-card p{font-size:14.5px;color:var(--text-soft)}
+.cur-card.no-card{background:var(--ink);border-color:var(--ink)}
+.cur-card.no-card .cur-num{color:#fff}
+.cur-card.no-card .cur-num .unit{color:var(--citrus)}
+.cur-card.no-card h3{color:#fff}
+.cur-card.no-card p{color:#B8CEC2}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+.step{padding:36px 32px;border-right:1.5px solid var(--line)}
+.step:last-child{border-right:none}
+.step-tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--citrus);margin-bottom:16px}
+.step h3{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.4px;color:var(--ink);margin-bottom:10px}
+.step p{font-size:15px;color:var(--text-soft)}
+
+/* outcomes band */
+.outcomes-band{background:var(--ink);color:#fff}
+.outcomes-band h2{color:#fff}
+.outcomes-band .sec-sub{color:#B8CEC2}
+.oc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.oc{border:1.5px solid rgba(255,255,255,.16);border-radius:var(--radius);padding:26px 24px;transition:border-color .2s,background .2s}
+.oc:hover{border-color:var(--citrus);background:rgba(255,255,255,.04)}
+.oc .emoji{font-size:30px}
+.oc h3{font-family:var(--display);font-weight:700;font-size:18px;margin:14px 0 6px}
+.oc p{font-family:var(--mono);font-size:11.5px;color:#9DBBAC;letter-spacing:.03em}
+
+/* pass */
+.pass-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.pass-card{background:linear-gradient(140deg,var(--leaf-deep),var(--ink));border-radius:22px;padding:36px;color:#fff;box-shadow:0 28px 64px -28px rgba(14,59,46,.5)}
+.pass-card .pk{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--citrus);margin-bottom:24px}
+.pass-card .pname{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-1px}
+.pass-card ul{list-style:none;margin-top:26px}
+.pass-card li{display:flex;gap:12px;padding:10px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.12)}
+.pass-card li:last-child{border:none}
+.pass-card li .tick{color:var(--citrus);font-weight:700}
+
+/* brands */
+.brands{background:var(--matcha-soft)}
+.brands-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.brands ul{list-style:none;margin-top:24px}
+.brands li{display:flex;gap:14px;padding:13px 0;font-size:15.5px;border-bottom:1px solid var(--line)}
+.brands li:last-child{border:none}
+.brands li .tick{color:var(--leaf);font-weight:700;flex-shrink:0}
+
+/* waitlist */
+.waitlist{text-align:center}
+.waitlist h2{margin:0 auto}
+.wl-form{display:flex;gap:12px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.wl-form input{font-family:var(--body);font-size:15.5px;padding:14px 22px;border-radius:99px;border:1.5px solid var(--line);background:#fff;min-width:300px;color:var(--text)}
+.wl-form input:focus{outline:3px solid var(--leaf);outline-offset:2px}
+.wl-note{font-family:var(--mono);font-size:12px;color:var(--text-soft);margin-top:18px}
+.wl-success{display:none;margin-top:28px;font-family:var(--mono);font-size:14px;color:var(--leaf-deep);background:var(--matcha);border-radius:12px;padding:16px 24px}
+
+/* footer */
+footer{border-top:1.5px solid var(--line);padding:44px 0;font-size:14px;color:var(--text-soft)}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.foot-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em}
+
+/* ---------- MODAL FORM ---------- */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,59,46,.45);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:22px;max-width:480px;width:100%;padding:36px;position:relative;box-shadow:0 40px 90px -30px rgba(14,59,46,.5);max-height:92vh;overflow-y:auto}
+.modal-close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:16px;color:var(--text-soft);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.modal-close:hover{border-color:var(--ink);color:var(--ink)}
+.modal .m-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf);margin-bottom:10px}
+.modal h3{font-family:var(--display);font-weight:750;font-size:26px;letter-spacing:-.7px;color:var(--ink);margin-bottom:6px}
+.modal .m-sub{font-size:14.5px;color:var(--text-soft);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;font-size:13.5px;color:var(--ink);margin-bottom:6px}
+.field input,.field select{width:100%;font-family:var(--body);font-size:15px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--text)}
+.field input:focus,.field select:focus{outline:3px solid var(--leaf);outline-offset:1px}
+.field .err{display:none;font-size:12.5px;color:#C0392B;margin-top:5px}
+.field.invalid input,.field.invalid select{border-color:#C0392B}
+.field.invalid .err{display:block}
+.role-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.role-btn{padding:11px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:14px;color:var(--text-soft);transition:all .15s}
+.role-btn.active{background:var(--matcha);border-color:var(--leaf);color:var(--leaf-deep)}
+.modal .btn{width:100%;margin-top:6px}
+.m-fine{font-family:var(--mono);font-size:11px;color:var(--text-soft);text-align:center;margin-top:14px}
+.m-success{display:none;text-align:center;padding:28px 0}
+.m-success .big{font-size:46px;margin-bottom:14px}
+.m-success h3{margin-bottom:8px}
+.m-success p{font-size:14.5px;color:var(--text-soft)}
+.modal.done form,.modal.done .m-eyebrow,.modal.done .m-head-sub{display:none}
+.modal.done .m-success{display:block}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* responsive */
+@media (max-width:960px){
+  .hero-grid,.pass-grid,.brands-inner{grid-template-columns:1fr;gap:44px}
+  .cur-grid,.steps,.oc-grid{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1.5px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .nav-links{display:none}
+  .oc-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .oc-grid{grid-template-columns:1fr}
+  .wl-form input{min-width:0;width:100%}
+  .city-badge{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="wordmark"><span class="dot"></span>KOI</a>
+    <div class="nav-right">
+      <span class="city-badge">DELHI NCR</span>
+      <button class="btn small" data-open-form>Get early access</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">The Better Choices Store</div>
+      <h1>Shop by outcome, <span class="strike">not aisle</span>.</h1>
+      <p class="hero-sub">India's first better-for-you commerce platform. Every product is vetted for what it actually does — then delivered to your door in 30 minutes.</p>
+      <div class="chips" role="tablist" aria-label="Shop by outcome">
+        <button class="chip active" data-goal="protein" role="tab" aria-selected="true">High protein</button>
+        <button class="chip" data-goal="gut" role="tab" aria-selected="false">Gut health</button>
+        <button class="chip" data-goal="sleep" role="tab" aria-selected="false">Better sleep</button>
+        <button class="chip" data-goal="sugar" role="tab" aria-selected="false">Less sugar</button>
+      </div>
+      <div class="hero-ctas">
+        <button class="btn" data-open-form>Join the waitlist</button>
+        <span class="delivery-note"><span class="pulse"></span>30-min delivery · Launching soon in Delhi NCR</span>
+      </div>
+    </div>
+
+    <div class="proof-stage">
+      <div class="proof-card" id="proofCard" aria-live="polite">
+        <div class="pc-top">
+          <span class="pc-goal" id="pcGoal">HIGH PROTEIN</span>
+          <span class="pc-eta">⏱ 28 min</span>
+        </div>
+        <div class="pc-visual" id="pcVisual">🥜</div>
+        <div class="pc-name" id="pcName">Millet Protein Bar — Cocoa</div>
+        <div class="pc-brand" id="pcBrand">by a small-batch brand from Jaipur</div>
+        <div class="why">
+          <div class="why-label">Why this one? <span class="stamp">KOI VERIFIED</span></div>
+          <ul id="pcWhy">
+            <li><span class="tick">✓</span>20 g protein per bar — lab-tested, not label-claimed</li>
+            <li><span class="tick">✓</span>Zero added sugar; sweetened with dates only</li>
+            <li><span class="tick">✓</span>7 ingredients. You can pronounce all of them</li>
+          </ul>
+        </div>
+        <div class="pc-bottom">
+          <span class="pc-price" id="pcPrice">₹149</span>
+          <button class="pc-add">Add to cart</button>
+        </div>
+      </div>
+      <div class="rejected-tag"><b>312 products rejected</b> in this category</div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>NO PALM OIL <span class="sep">●</span></span>
+    <span>NO REFINED SUGAR DISGUISED AS "JAGGERY POWDER" <span class="sep">●</span></span>
+    <span>NO ADS, EVER <span class="sep">●</span></span>
+    <span>NO PAY-TO-RANK <span class="sep">●</span></span>
+    <span>NO 40-INGREDIENT "HEALTH" BARS <span class="sep">●</span></span>
+    <span>NO GREENWASHING <span class="sep">●</span></span>
+    <span>NO PALM OIL <span class="sep">●</span></span>
+    <span>NO REFINED SUGAR DISGUISED AS "JAGGERY POWDER" <span class="sep">●</span></span>
+    <span>NO ADS, EVER <span class="sep">●</span></span>
+    <span>NO PAY-TO-RANK <span class="sep">●</span></span>
+    <span>NO 40-INGREDIENT "HEALTH" BARS <span class="sep">●</span></span>
+    <span>NO GREENWASHING <span class="sep">●</span></span>
+  </div>
+</div>
+
+<section class="curation">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal">Curation, not catalogue</div>
+    <h2 class="reveal">Everything here earned its place.</h2>
+    <p class="sec-sub reveal">Quick commerce optimises for ads and impulse. We optimise for trust. Most products that apply to be on KOI don't make it.</p>
+    <div class="cur-grid">
+      <div class="cur-card reveal">
+        <div class="cur-num">100<span class="unit">%</span></div>
+        <h3>Label-audited</h3>
+        <p>Every SKU's ingredient list is reviewed against our standards before it touches a shelf.</p>
+      </div>
+      <div class="cur-card no-card reveal">
+        <div class="cur-num">~70<span class="unit">%</span></div>
+        <h3>Get rejected</h3>
+        <p>Hidden sugars, filler oils, vague claims — most applicants don't pass. That's the point.</p>
+      </div>
+      <div class="cur-card reveal">
+        <div class="cur-num">0<span class="unit">ads</span></div>
+        <h3>Nothing is sponsored</h3>
+        <p>No brand can pay for placement, ranking, or a badge. Shelf position is earned on merit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal">The proof layer</div>
+    <h2 class="reveal">Every product answers one question: “Why this one?”</h2>
+    <p class="sec-sub reveal">Trust isn't a slogan — it's a process. Here's what sits behind every listing.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-tag">Audit</div>
+        <h3>The label, decoded</h3>
+        <p>We read the full ingredient list and nutrition panel so you don't have to — and flag what marketing hides.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-tag">Verify</div>
+        <h3>Claims, tested</h3>
+        <p>“20 g protein” means lab-verified 20 g protein. Claims that can't be substantiated don't ship.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-tag">Explain</div>
+        <h3>Proof, on the listing</h3>
+        <p>Each product carries its “Why this one?” card — the exact reasons it earned shelf space, in plain language.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="outcomes-band" id="outcomes">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal">Organised around your goals</div>
+    <h2 class="reveal">You don't shop for “snacks”. You shop for results.</h2>
+    <p class="sec-sub reveal">KOI's shelves are built around the outcomes people actually buy for — not legacy supermarket categories.</p>
+    <div class="oc-grid">
+      <div class="oc reveal"><div class="emoji">💪</div><h3>High protein</h3><p>VERIFIED G-PER-SERVING</p></div>
+      <div class="oc reveal"><div class="emoji">🦠</div><h3>Gut health</h3><p>LIVE CULTURES · FIBRE-FIRST</p></div>
+      <div class="oc reveal"><div class="emoji">😴</div><h3>Better sleep</h3><p>CAFFEINE-FREE · CALMING</p></div>
+      <div class="oc reveal"><div class="emoji">🍬</div><h3>Less sugar</h3><p>NO HIDDEN SWEETENERS</p></div>
+      <div class="oc reveal"><div class="emoji">⚡</div><h3>Clean energy</h3><p>NO CRASH FORMULAS</p></div>
+      <div class="oc reveal"><div class="emoji">🌾</div><h3>Whole grains</h3><p>MILLETS &amp; ANCIENT GRAINS</p></div>
+      <div class="oc reveal"><div class="emoji">🧒</div><h3>Kids, done right</h3><p>PARENT-GRADE SCRUTINY</p></div>
+      <div class="oc reveal"><div class="emoji">🏃</div><h3>Recovery</h3><p>ELECTROLYTES · CLEAN FUEL</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pass">
+  <div class="wrap pass-grid">
+    <div>
+      <div class="sec-eyebrow reveal">Membership</div>
+      <h2 class="reveal">KOI Pass: better choices, on autopilot.</h2>
+      <p class="sec-sub reveal">For households that have decided health is the default, not the exception. One membership, every delivery, zero second-guessing.</p>
+    </div>
+    <div class="pass-card reveal">
+      <div class="pk">KOI PASS · MEMBER</div>
+      <div class="pname">Your better-living layer</div>
+      <ul>
+        <li><span class="tick">✓</span>Free 30-minute delivery on every order</li>
+        <li><span class="tick">✓</span>Member pricing across the full catalogue</li>
+        <li><span class="tick">✓</span>Early access to new verified brands</li>
+        <li><span class="tick">✓</span>Goal-based picks, refreshed weekly</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="brands" id="brands">
+  <div class="wrap brands-inner">
+    <div>
+      <div class="sec-eyebrow reveal">For emerging brands</div>
+      <h2 class="reveal">Built well? You deserve a shelf.</h2>
+      <p class="sec-sub reveal">Thousands of honest wellness brands are invisible on ad-driven platforms. KOI is distribution for products that can prove themselves.</p>
+    </div>
+    <div class="reveal">
+      <ul>
+        <li><span class="tick">✓</span><span><b>Merit-based discovery.</b> Your placement is earned by your product, not your ad budget.</span></li>
+        <li><span class="tick">✓</span><span><b>The proof layer works for you.</b> Verification turns your honest label into a competitive moat.</span></li>
+        <li><span class="tick">✓</span><span><b>Reach committed buyers.</b> KOI customers arrive with a goal — and they come back.</span></li>
+        <li><span class="tick">✓</span><span><b>Dark-store distribution.</b> 30-minute reach across Delhi NCR from day one.</span></li>
+      </ul>
+      <p style="margin-top:26px"><button class="btn" data-open-form data-role="brand">Apply as a brand</button></p>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist" id="waitlist">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal">Launching soon · Delhi NCR</div>
+    <h2 class="reveal">Be first through the door.</h2>
+    <p class="sec-sub reveal" style="margin-left:auto;margin-right:auto">Join the waitlist for early access, founding-member KOI Pass pricing, and a say in what we stock first.</p>
+    <div class="wl-form reveal">
+      <button class="btn" data-open-form>Join the waitlist</button>
+    </div>
+    <p class="wl-note reveal">No spam. No ads. That's kind of our whole thing.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="wordmark" style="font-size:20px"><span class="dot" style="width:9px;height:9px"></span>KOI</span>
+    <span class="foot-tag">THE BETTER CHOICES STORE · EVERYTHING HERE EARNED ITS PLACE</span>
+    <span>© 2026 KOI Health</span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="formOverlay" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="modal" id="formModal">
+    <button class="modal-close" id="formClose" aria-label="Close form">✕</button>
+    <div class="m-eyebrow">Early access · Delhi NCR</div>
+    <h3 id="formTitle">Join the KOI waitlist</h3>
+    <p class="m-sub m-head-sub">Founding members get early access and launch pricing on KOI Pass.</p>
+    <form id="koiForm" novalidate>
+      <div class="role-toggle" role="radiogroup" aria-label="I am joining as">
+        <button type="button" class="role-btn active" data-role-val="consumer">I'm a shopper</button>
+        <button type="button" class="role-btn" data-role-val="brand">I'm a brand</button>
+      </div>
+      <div class="field" id="fName">
+        <label for="inName">Full name</label>
+        <input type="text" id="inName" autocomplete="name" placeholder="Your name">
+        <span class="err">Please enter your name.</span>
+      </div>
+      <div class="field" id="fEmail">
+        <label for="inEmail">Email</label>
+        <input type="email" id="inEmail" autocomplete="email" placeholder="you@email.com">
+        <span class="err">Please enter a valid email.</span>
+      </div>
+      <div class="field" id="fPhone">
+        <label for="inPhone">WhatsApp number</label>
+        <input type="tel" id="inPhone" autocomplete="tel" placeholder="+91 98xxx xxxxx">
+        <span class="err">Please enter a valid 10-digit number.</span>
+      </div>
+      <div class="field" id="fCity">
+        <label for="inCity">City</label>
+        <select id="inCity">
+          <option value="">Select your city</option>
+          <option>Delhi NCR</option>
+          <option>Other — notify me when KOI arrives</option>
+        </select>
+        <span class="err">Please select a city.</span>
+      </div>
+      <button type="submit" class="btn">Get early access</button>
+      <p class="m-fine">NO SPAM. NO ADS. THAT'S KIND OF OUR WHOLE THING.</p>
+    </form>
+    <div class="m-success">
+      <div class="big">🌿</div>
+      <h3>You're on the list.</h3>
+      <p id="successMsg">We'll write the moment your city goes live.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Outcome → proof card swap ----
+const goals = {
+  protein: {
+    tag:'HIGH PROTEIN', emoji:'🥜', name:'Millet Protein Bar — Cocoa',
+    brand:'by a small-batch brand from Jaipur', price:'₹149',
+    why:[
+      '20 g protein per bar — lab-tested, not label-claimed',
+      'Zero added sugar; sweetened with dates only',
+      '7 ingredients. You can pronounce all of them'
+    ]
+  },
+  gut: {
+    tag:'GUT HEALTH', emoji:'🥣', name:'Live-Culture Millet Kanji',
+    brand:'fermented fresh, batch-dated', price:'₹119',
+    why:[
+      '10⁹ CFU live cultures per serving, verified at expiry',
+      '6 g prebiotic fibre — feeds what the cultures start',
+      'No preservatives; 9-day shelf life is the proof'
+    ]
+  },
+  sleep: {
+    tag:'BETTER SLEEP', emoji:'🌙', name:'Moon Milk — Ashwagandha Blend',
+    brand:'caffeine-free, evening-formulated', price:'₹329',
+    why:[
+      'KSM-66 ashwagandha at clinically studied dose (300 mg)',
+      'Zero caffeine, zero added sugar, zero "natural flavours"',
+      'Third-party tested for heavy metals'
+    ]
+  },
+  sugar: {
+    tag:'LESS SUGAR', emoji:'🍫', name:'85% Dark Chocolate — Single Origin',
+    brand:'bean-to-bar from Idukki, Kerala', price:'₹249',
+    why:[
+      '3 g sugar per serving — and it says so honestly',
+      'No emulsifiers, no vegetable fat, no vanillin',
+      'Two ingredients: cacao and unrefined cane sugar'
+    ]
+  }
+};
+
+const card = document.getElementById('proofCard');
+const els = {
+  goal:document.getElementById('pcGoal'), visual:document.getElementById('pcVisual'),
+  name:document.getElementById('pcName'), brand:document.getElementById('pcBrand'),
+  why:document.getElementById('pcWhy'), price:document.getElementById('pcPrice')
+};
+
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-selected','false')});
+    chip.classList.add('active');chip.setAttribute('aria-selected','true');
+    const g = goals[chip.dataset.goal];
+    card.classList.add('swapping');
+    setTimeout(()=>{
+      els.goal.textContent=g.tag; els.visual.textContent=g.emoji;
+      els.name.textContent=g.name; els.brand.textContent=g.brand; els.price.textContent=g.price;
+      els.why.innerHTML=g.why.map(w=>`<li><span class="tick">✓</span>${w}</li>`).join('');
+      card.classList.remove('swapping');
+    },220);
+  });
+});
+
+// ---- Scroll reveal ----
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ---- Early access modal ----
+// ⚠️ SET THIS: replace with your email address. Submissions will be emailed to you via FormSubmit (free).
+// On the FIRST submission, FormSubmit sends you a one-time activation email — click the link in it once, and all future signups land in your inbox.
+const OWNER_EMAIL = 'betterme.koi@gmail.com';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
+
+const overlay = document.getElementById('formOverlay');
+const modal = document.getElementById('formModal');
+let currentRole = 'consumer';
+let lastFocused = null;
+
+function openForm(role){
+  currentRole = role || 'consumer';
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.toggle('active', b.dataset.roleVal===currentRole));
+  modal.classList.remove('done');
+  lastFocused = document.activeElement;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('inName').focus();
+}
+function closeForm(){
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+  if(lastFocused) lastFocused.focus();
+}
+
+document.querySelectorAll('[data-open-form]').forEach(btn=>{
+  btn.addEventListener('click',()=>openForm(btn.dataset.role));
+});
+document.getElementById('formClose').addEventListener('click',closeForm);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeForm()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeForm()});
+
+document.querySelectorAll('.role-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    currentRole=b.dataset.roleVal;
+    document.querySelectorAll('.role-btn').forEach(x=>x.classList.toggle('active',x===b));
+  });
+});
+
+document.getElementById('koiForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=document.getElementById('inName'),
+        email=document.getElementById('inEmail'),
+        phone=document.getElementById('inPhone'),
+        city=document.getElementById('inCity');
+  let ok=true;
+  const mark=(id,bad)=>{document.getElementById(id).classList.toggle('invalid',bad);if(bad)ok=false};
+  mark('fName', name.value.trim().length<2);
+  mark('fEmail', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
+  mark('fPhone', (phone.value.replace(/\D/g,'').length<10));
+  mark('fCity', !city.value);
+  if(!ok)return;
+
+  const payload={
+    _subject: 'KOI signup: ' + (currentRole==='brand'?'Brand application':'Waitlist') + ' — ' + name.value.trim(),
+    _template: 'table',
+    'Joining as': currentRole==='brand' ? 'Brand' : 'Shopper',
+    'Name': name.value.trim(),
+    'Email': email.value.trim(),
+    'WhatsApp': phone.value.trim(),
+    'City': city.value,
+    'Submitted at': new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
+  };
+  if(FORM_ENDPOINT && !FORM_ENDPOINT.includes('your-email@example.com')){
+    try{
+      await fetch(FORM_ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload)
+      });
+    }catch(err){console.error('Signup submit failed',err)}
+  }else{
+    console.warn('KOI signup not emailed — set OWNER_EMAIL in the script. Payload:',payload);
+  }
+  document.getElementById('successMsg').textContent = currentRole==='brand'
+    ? 'Thanks for applying. Our curation team will reach out to review your products.'
+    : "We'll write the moment your city goes live.";
+  modal.classList.add('done');
+  e.target.reset();
+});
+</script>
+</body>
+</html>
